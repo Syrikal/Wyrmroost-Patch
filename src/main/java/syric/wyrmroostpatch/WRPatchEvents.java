@@ -44,6 +44,7 @@ public class WRPatchEvents {
                     } else {
                         Util.chatPrint("Dragon cannot breed anymore or you don't own it", world);
                     }
+                    event.setResult(Event.Result.DENY);
                     event.setCanceled(true);
                 }
             }
