@@ -1,6 +1,9 @@
 package syric.wyrmroostpatch;
 
+import com.github.wolfshotz.wyrmroost.entities.dragon.AbstractDragonEntity;
+import com.github.wolfshotz.wyrmroost.registry.WREntities;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
@@ -24,4 +27,15 @@ public class Util {
             chatPrint(input, player);
         }
     }
+
+    public static int getBreedCap(EntityType type) {
+        if (type == WREntities.ALPINE.get()) {
+            return 3;
+        } else if (type == WREntities.ROOSTSTALKER.get()) {
+            return 5;
+        } else {
+            return 0;
+        }
+    }
+
 }

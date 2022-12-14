@@ -1,5 +1,6 @@
 package syric.wyrmroostpatch;
 
+import com.github.wolfshotz.wyrmroost.registry.WREntities;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
@@ -49,11 +50,11 @@ public class WyrmroostPatch
 
     }
 
-    private void setup(final FMLCommonSetupEvent event)
-    {
-        // some preinit code
-        LOGGER.info("HELLO FROM PREINIT");
-        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+    private void setup(final FMLCommonSetupEvent event) {
+        ((DragonFeedItem) WRPatchItems.ALPINE_FEED.get()).setDragonType(WREntities.ALPINE.get());
+        ((DragonFeedItem) WRPatchItems.HALF_ALPINE_FEED.get()).setDragonType(WREntities.ALPINE.get());
+        ((DragonFeedItem) WRPatchItems.ROOST_FEED.get()).setDragonType(WREntities.ROOSTSTALKER.get());
+        ((DragonFeedItem) WRPatchItems.HALF_ROOST_FEED.get()).setDragonType(WREntities.ROOSTSTALKER.get());
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
