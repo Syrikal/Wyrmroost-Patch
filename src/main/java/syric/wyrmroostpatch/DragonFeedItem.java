@@ -9,7 +9,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import org.lwjgl.system.CallbackI;
 
 public class DragonFeedItem extends Item {
 
@@ -27,7 +26,7 @@ public class DragonFeedItem extends Item {
         return dragonType;
     }
 
-    public ItemStack getNextItem() {
+    public ItemStack getNextItem(Entity ent) {
         if (this instanceof HalfEatenDragonFeedItem) {
             ItemStack itemStack = new ItemStack(WRItems.DRAGON_EGG.get());
             CompoundNBT nbt = new CompoundNBT();
@@ -36,17 +35,24 @@ public class DragonFeedItem extends Item {
             itemStack.setTag(nbt);
             return itemStack;
         } else {
+            CompoundNBT nbt = new CompoundNBT();
+            nbt.putUUID("FirstParent", ent.getUUID());
             if (this.dragonType == WREntities.ALPINE.get()) {
-                return WRPatchItems.HALF_ALPINE_FEED.get().getDefaultInstance();
+                ItemStack output = WRPatchItems.HALF_ALPINE_FEED.get().getDefaultInstance();
+                output.setTag(nbt);
+                return output;
             } else if (this.dragonType == WREntities.ROOSTSTALKER.get()) {
-                return WRPatchItems.HALF_ROOST_FEED.get().getDefaultInstance();
+                ItemStack output = WRPatchItems.HALF_ROOST_FEED.get().getDefaultInstance();
+                output.setTag(nbt);
+                return output;
             } else {
                 return this.getDefaultInstance();
-
             }
         }
     }
 
-//    public boolean checkTarget(AbstractDragonEntity ent) {
-//    }
+    public boolean checkTarget(AbstractDragonEntity ent, ItemStack itemStack) {
+//        Util.chatPrint("Item is not half-eaten, checkTarget returning true", ent.level);
+        return true;
+    }
 }

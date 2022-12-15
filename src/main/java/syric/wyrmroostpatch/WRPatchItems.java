@@ -31,5 +31,7 @@ public class WRPatchItems {
     public static final RegistryObject<Item> HALF_ROOST_FEED = ITEMS.register("half_roost_feed",
             () -> new HalfEatenDragonFeedItem(new Item.Properties().stacksTo(1).tab(Wyrmroost.ITEM_GROUP).rarity(Rarity.UNCOMMON)));
 
+    public static final RegistryObject<Item> BREED_RESETTER = ITEMS.register("breed_resetter",
+            () -> new Item(new Item.Properties().tab(Wyrmroost.ITEM_GROUP)));
 
 }

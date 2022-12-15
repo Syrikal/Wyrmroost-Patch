@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -26,7 +27,7 @@ import java.util.stream.Collectors;
 public class WyrmroostPatch
 {
     // Directly reference a log4j logger.
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "wyrmroostpatch";
 
     public WyrmroostPatch() {
@@ -47,6 +48,8 @@ public class WyrmroostPatch
 
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
         forgeEventBus.addListener(this::interactEntity);
+        forgeEventBus.addListener(this::cancelRooststalkers);
+        forgeEventBus.addListener(this::shutUpAlpines);
 
     }
 
@@ -65,7 +68,7 @@ public class WyrmroostPatch
     private void enqueueIMC(final InterModEnqueueEvent event)
     {
         // some example code to dispatch IMC to another mod
-        InterModComms.sendTo("examplemod", "helloworld", () -> { LOGGER.info("Hello world from the MDK"); return "Hello world";});
+//        InterModComms.sendTo("examplemod", "helloworld", () -> { LOGGER.info("Hello world from the MDK"); return "Hello world";});
     }
 
     private void processIMC(final InterModProcessEvent event)
@@ -79,6 +82,16 @@ public class WyrmroostPatch
     private void interactEntity(PlayerInteractEvent.EntityInteract event) {
         WRPatchEvents.interactEntity(event);
     }
+
+    private void cancelRooststalkers(PlayerInteractEvent.EntityInteractSpecific event) {
+        WRPatchEvents.cancelRooststalkers(event);
+    }
+
+    private void shutUpAlpines(PlaySoundAtEntityEvent event) {
+        Shushing.shush(event);
+    }
+
+
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
