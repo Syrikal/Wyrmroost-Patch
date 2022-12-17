@@ -9,7 +9,7 @@ import java.util.UUID;
 public class HalfEatenDragonFeedItem extends DragonFeedItem {
 
     public HalfEatenDragonFeedItem(Properties properties) {
-        super(properties);
+        super(properties, true);
     }
 
     @Override

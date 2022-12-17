@@ -10,12 +10,17 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 
+import java.util.UUID;
+
 public class DragonFeedItem extends Item {
+
+    public final boolean halfEaten;
 
     private EntityType<? extends AbstractDragonEntity> dragonType;
 
-    public DragonFeedItem(Properties properties) {
+    public DragonFeedItem(Properties properties, boolean halfEaten) {
         super(properties);
+        this.halfEaten = halfEaten;
     }
 
     public void setDragonType(EntityType<? extends AbstractDragonEntity> dragonType) {
@@ -26,8 +31,9 @@ public class DragonFeedItem extends Item {
         return dragonType;
     }
 
-    public ItemStack getNextItem(Entity ent) {
-        if (this instanceof HalfEatenDragonFeedItem) {
+    //Returns either a dragon egg, or the half-eaten version (with the first parent's ID appended).
+    public ItemStack getNextItem(Entity parentCandidate) {
+        if (halfEaten) {
             ItemStack itemStack = new ItemStack(WRItems.DRAGON_EGG.get());
             CompoundNBT nbt = new CompoundNBT();
             nbt.putString("DragonType", EntityType.getKey(dragonType).toString());
@@ -36,7 +42,7 @@ public class DragonFeedItem extends Item {
             return itemStack;
         } else {
             CompoundNBT nbt = new CompoundNBT();
-            nbt.putUUID("FirstParent", ent.getUUID());
+            nbt.putUUID("FirstParent", parentCandidate.getUUID());
             if (this.dragonType == WREntities.ALPINE.get()) {
                 ItemStack output = WRPatchItems.HALF_ALPINE_FEED.get().getDefaultInstance();
                 output.setTag(nbt);
@@ -51,8 +57,29 @@ public class DragonFeedItem extends Item {
         }
     }
 
-    public boolean checkTarget(AbstractDragonEntity ent, ItemStack itemStack) {
-//        Util.chatPrint("Item is not half-eaten, checkTarget returning true", ent.level);
-        return true;
+    //Checks if the dragon clicked is an acceptable mate. Returns 'false' if the item is half-eaten
+    //and the stored dragon has just been clicked again.
+    //Effectively, prevents you from breeding a dragon with itself.
+    public boolean checkTarget(AbstractDragonEntity parentCandidate, ItemStack itemStack) {
+        //The first parent can be any dragon that meets the criteria.
+        if (!halfEaten) {
+            return true;
+        }
+        if (!itemStack.hasTag()) {
+            Util.chatPrint("item has no nbt tag, checkTarget returning false", parentCandidate.level);
+            return false;
+        } else {
+            assert itemStack.getTag() != null;
+            UUID firstParentID = itemStack.getTag().getUUID("FirstParent");
+//            Util.chatPrint("First parent ID: " + firstParentID, parentCandidate.level);
+//            Util.chatPrint("Second parent ID: " + parentCandidate.getUUID(), parentCandidate.level);
+
+
+            if (firstParentID.equals(parentCandidate.getUUID())) {
+                return false;
+            } else {
+                return true;
+            }
+        }
     }
 }

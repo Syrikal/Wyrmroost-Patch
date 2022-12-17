@@ -10,7 +10,9 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
@@ -50,6 +52,8 @@ public class WyrmroostPatch
         forgeEventBus.addListener(this::interactEntity);
         forgeEventBus.addListener(this::cancelRooststalkers);
         forgeEventBus.addListener(this::shutUpAlpines);
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, WRPatchConfig.SPEC, "wyrmroostpatch-client.toml");
 
     }
 
