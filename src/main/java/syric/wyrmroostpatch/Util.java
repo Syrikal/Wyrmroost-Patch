@@ -30,9 +30,9 @@ public class Util {
 
     public static int getBreedCap(EntityType type) {
         if (type == WREntities.ALPINE.get()) {
-            return 3;
+            return WRPatchConfig.alpineBreedCap.get();
         } else if (type == WREntities.ROOSTSTALKER.get()) {
-            return 5;
+            return WRPatchConfig.rooststalkerBreedCap.get();
         } else {
             return 0;
         }

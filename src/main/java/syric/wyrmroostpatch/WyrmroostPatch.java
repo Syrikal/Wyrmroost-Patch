@@ -50,8 +50,7 @@ public class WyrmroostPatch
 
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
         forgeEventBus.addListener(this::interactEntity);
-        forgeEventBus.addListener(this::cancelRooststalkers);
-        forgeEventBus.addListener(this::shutUpAlpines);
+//        forgeEventBus.addListener(this::cancelRooststalkers);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, WRPatchConfig.SPEC, "wyrmroostpatch-client.toml");
 
@@ -62,6 +61,12 @@ public class WyrmroostPatch
         ((DragonFeedItem) WRPatchItems.HALF_ALPINE_FEED.get()).setDragonType(WREntities.ALPINE.get());
         ((DragonFeedItem) WRPatchItems.ROOST_FEED.get()).setDragonType(WREntities.ROOSTSTALKER.get());
         ((DragonFeedItem) WRPatchItems.HALF_ROOST_FEED.get()).setDragonType(WREntities.ROOSTSTALKER.get());
+
+        if (WRPatchConfig.enableShush.get()) {
+            Shushing.init();
+            MinecraftForge.EVENT_BUS.addListener(this::shush);
+        }
+
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
@@ -91,7 +96,7 @@ public class WyrmroostPatch
         WRPatchEvents.cancelRooststalkers(event);
     }
 
-    private void shutUpAlpines(PlaySoundAtEntityEvent event) {
+    private void shush(PlaySoundAtEntityEvent event) {
         Shushing.shush(event);
     }
 

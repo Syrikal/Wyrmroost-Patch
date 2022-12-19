@@ -31,7 +31,13 @@ public class WRPatchEvents {
             DragonFeedItem feedItem = null;
             AbstractDragonEntity dragonEntity = null;
 
+            if (world.isClientSide) {
+                return;
+            }
+
             if (item instanceof DragonFeedItem) {
+//                event.setCanceled(true);
+//                event.setResult(Event.Result.DEFAULT);
                 feedItem = (DragonFeedItem) item;
                 if (entity.getType() == feedItem.getDragonType()) {
                     dragonEntity = (AbstractDragonEntity) entity;
@@ -40,7 +46,7 @@ public class WRPatchEvents {
                         Util.chatPrint("Breedcount: " + dragonEntity.breedCount, world);
                     }
 
-                    boolean canBreed = dragonEntity.breedCount < Util.getBreedCap(dragonEntity.getType());
+                    boolean canBreed = dragonEntity.breedCount < Util.getBreedCap(dragonEntity.getType()) || !WRPatchConfig.enableBreedCaps.get();
                     boolean isTamed = dragonEntity.getOwner() == event.getPlayer();
                     if (canBreed && isTamed) {
                         boolean notSameDragon = ((DragonFeedItem) item).checkTarget(dragonEntity, itemStack);
@@ -49,15 +55,17 @@ public class WRPatchEvents {
                         }
                     }
 
-                    event.setCanceled(true);
-                    event.setResult(Event.Result.DENY);
-                    Util.chatPrint("Canceled event", world);
+//                    event.setCanceled(true);
+//                    event.setResult(Event.Result.DENY);
+//                    Util.chatPrint("Canceled event", world);
                 }
             }
 
             if (breedSuccess) {
 
                 if (event.getSide() == LogicalSide.SERVER) {
+//                    event.setCanceled(true);
+//                    event.setResult(Event.Result.DENY);
                     if (!event.getPlayer().isCreative()) {
                         itemStack.shrink(1);
                     }
@@ -66,6 +74,8 @@ public class WRPatchEvents {
                     dragonEntity.breedCount++;
                 } else if (event.getSide() == LogicalSide.CLIENT) {
                     dragonEntity.eat(itemStack);
+                    event.setCanceled(true);
+                    event.setResult(Event.Result.DENY);
                 }
 
             }
