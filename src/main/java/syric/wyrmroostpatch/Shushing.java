@@ -14,20 +14,10 @@ public class Shushing {
 
     private static List<SoundEvent> ALL_SOUNDS;
 
-    private static List<SoundEvent> ALPINE_SOUNDS;
-    private static List<SoundEvent> ROYALRED_SOUNDS;
-    private static List<SoundEvent> ROOSTSTALKER_SOUNDS;
-    private static List<SoundEvent> BFL_SOUNDS;
-    private static List<SoundEvent> GLIDER_SOUNDS;
-    private static List<SoundEvent> OWDRAKE_SOUNDS;
-    private static List<SoundEvent> CANARI_SOUNDS;
-    private static List<SoundEvent> DFD_SOUNDS;
-    private static List<SoundEvent> DESERTWYRM_SOUNDS;
-    private static List<SoundEvent> COIN_SOUNDS;
-
-    private static Map<List<SoundEvent>, Double> MODIFIED_SPECIES = new HashMap<List<SoundEvent>, Double>();
+    private static final Map<List<SoundEvent>, Double> MODIFIED_SPECIES = new HashMap<List<SoundEvent>, Double>();
 
     private static List<SoundEvent> ROARS;
+    private static List<SoundEvent> IDLES;
 
     public static void init() {
         ALL_SOUNDS = new ArrayList<>(Arrays.asList(
@@ -67,7 +57,7 @@ public class Shushing {
 
 
         if (WRPatchConfig.alpineMult.get() != 1) {
-            ALPINE_SOUNDS = new ArrayList<>(Arrays.asList(
+            List<SoundEvent> ALPINE_SOUNDS = new ArrayList<>(Arrays.asList(
                     WRSounds.ENTITY_ALPINE_IDLE.get(),
                     WRSounds.ENTITY_ALPINE_DEATH.get(),
                     WRSounds.ENTITY_ALPINE_HURT.get(),
@@ -76,7 +66,7 @@ public class Shushing {
         }
 
         if (WRPatchConfig.royalredMult.get() != 1) {
-            ROYALRED_SOUNDS = new ArrayList<>(Arrays.asList(
+            List<SoundEvent> ROYALRED_SOUNDS = new ArrayList<>(Arrays.asList(
                     WRSounds.ENTITY_ROYALRED_IDLE.get(),
                     WRSounds.ENTITY_ROYALRED_DEATH.get(),
                     WRSounds.ENTITY_ROYALRED_HURT.get(),
@@ -85,7 +75,7 @@ public class Shushing {
         }
 
         if (WRPatchConfig.rooststalkerMult.get() != 1) {
-            ROOSTSTALKER_SOUNDS = new ArrayList<>(Arrays.asList(
+            List<SoundEvent> ROOSTSTALKER_SOUNDS = new ArrayList<>(Arrays.asList(
                     WRSounds.ENTITY_STALKER_IDLE.get(),
                     WRSounds.ENTITY_STALKER_DEATH.get(),
                     WRSounds.ENTITY_STALKER_HURT.get()));
@@ -93,7 +83,7 @@ public class Shushing {
         }
 
         if (WRPatchConfig.butterflyleviathanMult.get() != 1) {
-            BFL_SOUNDS = new ArrayList<>(Arrays.asList(
+            List<SoundEvent> BFL_SOUNDS = new ArrayList<>(Arrays.asList(
                     WRSounds.ENTITY_BFLY_IDLE.get(),
                     WRSounds.ENTITY_BFLY_DEATH.get(),
                     WRSounds.ENTITY_BFLY_ROAR.get(),
@@ -102,7 +92,7 @@ public class Shushing {
         }
 
         if (WRPatchConfig.silvergliderMult.get() != 1) {
-            GLIDER_SOUNDS = new ArrayList<>(Arrays.asList(
+            List<SoundEvent> GLIDER_SOUNDS = new ArrayList<>(Arrays.asList(
                     WRSounds.ENTITY_SILVERGLIDER_DEATH.get(),
                     WRSounds.ENTITY_SILVERGLIDER_HURT.get(),
                     WRSounds.ENTITY_SILVERGLIDER_IDLE.get()));
@@ -110,7 +100,7 @@ public class Shushing {
         }
 
         if (WRPatchConfig.owdrakeMult.get() != 1) {
-            OWDRAKE_SOUNDS = new ArrayList<>(Arrays.asList(
+            List<SoundEvent> OWDRAKE_SOUNDS = new ArrayList<>(Arrays.asList(
                     WRSounds.ENTITY_OWDRAKE_DEATH.get(),
                     WRSounds.ENTITY_OWDRAKE_HURT.get(),
                     WRSounds.ENTITY_OWDRAKE_ROAR.get(),
@@ -119,7 +109,7 @@ public class Shushing {
         }
 
         if (WRPatchConfig.canariwyvernMult.get() != 1) {
-            CANARI_SOUNDS = new ArrayList<>(Arrays.asList(
+            List<SoundEvent> CANARI_SOUNDS = new ArrayList<>(Arrays.asList(
                     WRSounds.ENTITY_CANARI_DEATH.get(),
                     WRSounds.ENTITY_CANARI_HURT.get(),
                     WRSounds.ENTITY_CANARI_IDLE.get()));
@@ -127,7 +117,7 @@ public class Shushing {
         }
 
         if (WRPatchConfig.dragonfruitMult.get() != 1) {
-            DFD_SOUNDS = new ArrayList<>(Arrays.asList(
+            List<SoundEvent> DFD_SOUNDS = new ArrayList<>(Arrays.asList(
                     WRSounds.ENTITY_DFD_DEATH.get(),
                     WRSounds.ENTITY_DFD_HURT.get(),
                     WRSounds.ENTITY_DFD_IDLE.get()));
@@ -135,13 +125,13 @@ public class Shushing {
         }
 
         if (WRPatchConfig.desertwyrmMult.get() != 1) {
-            DESERTWYRM_SOUNDS = new ArrayList<>(Collections.singletonList(
+            List<SoundEvent> DESERTWYRM_SOUNDS = new ArrayList<>(Collections.singletonList(
                     WRSounds.ENTITY_LDWYRM_IDLE.get()));
             MODIFIED_SPECIES.put(DESERTWYRM_SOUNDS, WRPatchConfig.desertwyrmMult.get());
         }
 
         if (WRPatchConfig.coindragonMult.get() != 1) {
-            COIN_SOUNDS = new ArrayList<>(Collections.singletonList(
+            List<SoundEvent> COIN_SOUNDS = new ArrayList<>(Collections.singletonList(
                     WRSounds.ENTITY_COINDRAGON_IDLE.get()));
             MODIFIED_SPECIES.put(COIN_SOUNDS, WRPatchConfig.coindragonMult.get());
         }
@@ -153,6 +143,21 @@ public class Shushing {
                     WRSounds.ENTITY_OWDRAKE_ROAR.get(),
                     WRSounds.ENTITY_ROYALRED_ROAR.get()));
         }
+
+        if (WRPatchConfig.idleCancel.get() != 0) {
+            IDLES = new ArrayList<>(Arrays.asList(
+                    WRSounds.ENTITY_ALPINE_IDLE.get(),
+                    WRSounds.ENTITY_COINDRAGON_IDLE.get(),
+                    WRSounds.ENTITY_DFD_IDLE.get(),
+                    WRSounds.ENTITY_LDWYRM_IDLE.get(),
+                    WRSounds.ENTITY_CANARI_IDLE.get(),
+                    WRSounds.ENTITY_OWDRAKE_IDLE.get(),
+                    WRSounds.ENTITY_SILVERGLIDER_IDLE.get(),
+                    WRSounds.ENTITY_STALKER_IDLE.get(),
+                    WRSounds.ENTITY_ROYALRED_IDLE.get(),
+                    WRSounds.ENTITY_BFLY_IDLE.get()));
+        }
+
     }
 
     public static void shush(PlaySoundAtEntityEvent event) {
@@ -168,6 +173,11 @@ public class Shushing {
     }
 
     private static Double calculateMultiplier(SoundEvent sound) {
+        Random random = new Random();
+        if (WRPatchConfig.idleCancel.get() != 0 && IDLES.contains(sound) && random.nextDouble() < WRPatchConfig.idleCancel.get()) {
+            return 0.0;
+        }
+
         double global = WRPatchConfig.globalMult.get();
         double species = 1;
         double roar = 1;

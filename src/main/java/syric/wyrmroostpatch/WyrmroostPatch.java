@@ -52,7 +52,8 @@ public class WyrmroostPatch
         forgeEventBus.addListener(this::interactEntity);
 //        forgeEventBus.addListener(this::cancelRooststalkers);
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, WRPatchConfig.SPEC, "wyrmroostpatch-client.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, WRPatchConfig.CLIENT_SPEC, "wyrmroostpatch-client.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, WRPatchConfig.COMMON_SPEC, "wyrmroostpatch-common.toml");
 
     }
 

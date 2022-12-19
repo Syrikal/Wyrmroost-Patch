@@ -5,8 +5,10 @@ import com.github.wolfshotz.wyrmroost.registry.WREntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
+import net.minecraft.item.Item;
 
 import java.util.List;
 
@@ -36,6 +38,10 @@ public class Util {
         } else {
             return 0;
         }
+    }
+
+    public static boolean isDragonFeedItem(Item item) {
+        return (item instanceof DragonFeedItem) || item.equals(Items.GOLD_NUGGET);
     }
 
 }

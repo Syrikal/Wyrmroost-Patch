@@ -9,6 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
@@ -17,6 +18,8 @@ import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.fml.LogicalSide;
 
 import java.util.logging.LogManager;
+
+import static syric.wyrmroostpatch.Util.isDragonFeedItem;
 
 public class WRPatchEvents {
 
@@ -31,60 +34,82 @@ public class WRPatchEvents {
             DragonFeedItem feedItem = null;
             AbstractDragonEntity dragonEntity = null;
 
-            if (world.isClientSide) {
+            if (event.getSide() != LogicalSide.SERVER) {
                 return;
             }
 
-            if (item instanceof DragonFeedItem) {
-//                event.setCanceled(true);
-//                event.setResult(Event.Result.DEFAULT);
-                feedItem = (DragonFeedItem) item;
-                if (entity.getType() == feedItem.getDragonType()) {
-                    dragonEntity = (AbstractDragonEntity) entity;
+            if (isDragonFeedItem(item) && entity instanceof AbstractDragonEntity && event.getSide() == LogicalSide.SERVER) {
+                event.setCanceled(true);
+            }
 
-                    if (event.getSide() == LogicalSide.SERVER) {
-                        Util.chatPrint("Breedcount: " + dragonEntity.breedCount, world);
-                    }
-
-                    boolean canBreed = dragonEntity.breedCount < Util.getBreedCap(dragonEntity.getType()) || !WRPatchConfig.enableBreedCaps.get();
-                    boolean isTamed = dragonEntity.getOwner() == event.getPlayer();
-                    if (canBreed && isTamed) {
-                        boolean notSameDragon = ((DragonFeedItem) item).checkTarget(dragonEntity, itemStack);
-                        if (notSameDragon) {
-                            breedSuccess = true;
+            if (isDragonFeedItem(item)) {
+                if (item.equals(Items.GOLD_NUGGET)) {
+                    if (entity.getType() == WREntities.ROOSTSTALKER.get()) {
+                        assert entity instanceof AbstractDragonEntity;
+                        dragonEntity = (AbstractDragonEntity) entity;
+                        if (event.getSide() == LogicalSide.SERVER) {
+                            Util.chatPrint("Breedcount: " + dragonEntity.breedCount, world);
+                        }
+                        boolean canBreed = dragonEntity.breedCount < Util.getBreedCap(dragonEntity.getType()) || !WRPatchConfig.enableBreedCaps.get();
+                        boolean isTamed = dragonEntity.getOwner() == event.getPlayer();
+                        if (canBreed && isTamed) {
+                            boolean notSameDragon = DragonFeedItem.checkTargetStalker(dragonEntity, itemStack);
+                            if (notSameDragon) {
+                                breedSuccess = true;
+                            }
                         }
                     }
+                } else {
+                    feedItem = (DragonFeedItem) item;
+                    if (entity.getType() == feedItem.getDragonType()) {
+                        assert entity instanceof AbstractDragonEntity;
+                        dragonEntity = (AbstractDragonEntity) entity;
 
-//                    event.setCanceled(true);
-//                    event.setResult(Event.Result.DENY);
-//                    Util.chatPrint("Canceled event", world);
+                        if (event.getSide() == LogicalSide.SERVER) {
+                            Util.chatPrint("Breedcount: " + dragonEntity.breedCount, world);
+                        }
+
+                        boolean canBreed = dragonEntity.breedCount < Util.getBreedCap(dragonEntity.getType()) || !WRPatchConfig.enableBreedCaps.get();
+                        boolean isTamed = dragonEntity.getOwner() == event.getPlayer();
+                        if (canBreed && isTamed) {
+                            boolean notSameDragon = ((DragonFeedItem) item).checkTarget(dragonEntity, itemStack);
+                            if (notSameDragon) {
+                                breedSuccess = true;
+                            }
+                        }
+                    }
                 }
+
+
+
             }
 
             if (breedSuccess) {
-
                 if (event.getSide() == LogicalSide.SERVER) {
-//                    event.setCanceled(true);
-//                    event.setResult(Event.Result.DENY);
+                    ItemStack tempStack = itemStack.copy();
+
                     if (!event.getPlayer().isCreative()) {
                         itemStack.shrink(1);
                     }
-                    event.getPlayer().addItem(feedItem.getNextItem(entity));
+
+                    if (item.equals(Items.GOLD_NUGGET)) {
+                        event.getPlayer().addItem(DragonFeedItem.getNextItemStalker(entity, tempStack));
+                    } else {
+                        assert feedItem != null;
+                        event.getPlayer().addItem(feedItem.getNextItem(entity));
+                    }
+
                     dragonEntity.setInLove(event.getPlayer());
                     dragonEntity.breedCount++;
                 } else if (event.getSide() == LogicalSide.CLIENT) {
                     dragonEntity.eat(itemStack);
-                    event.setCanceled(true);
-                    event.setResult(Event.Result.DENY);
                 }
-
             }
 
 
 
             if (itemStack.getItem() == WRPatchItems.BREED_RESETTER.get() && event.getSide() == LogicalSide.SERVER && entity instanceof AbstractDragonEntity) {
                 ((AbstractDragonEntity) entity).breedCount = 0;
-//                Util.chatPrint("Reset breedCount to " + ((AbstractDragonEntity) entity).breedCount, world);
                 event.setCanceled(true);
             }
 
