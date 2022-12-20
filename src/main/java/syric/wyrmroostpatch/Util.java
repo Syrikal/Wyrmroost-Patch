@@ -1,22 +1,17 @@
 package syric.wyrmroostpatch;
 
-import com.github.wolfshotz.wyrmroost.entities.dragon.AbstractDragonEntity;
 import com.github.wolfshotz.wyrmroost.registry.WREntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
-import net.minecraft.item.Item;
-import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.common.extensions.IForgeWorldServer;
 
-import javax.annotation.Nullable;
 import java.util.List;
-import java.util.UUID;
 
 public class Util {
 

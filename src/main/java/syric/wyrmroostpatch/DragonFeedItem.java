@@ -16,10 +16,6 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.ColorHandlerEvent;
-import com.github.wolfshotz.wyrmroost.items.DragonEggItem;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -52,7 +48,7 @@ public class DragonFeedItem extends Item {
             ItemStack itemStack = new ItemStack(WRItems.DRAGON_EGG.get());
             CompoundNBT nbt = new CompoundNBT();
             nbt.putString("DragonType", EntityType.getKey(dragonType).toString());
-            nbt.putInt("HatchTime", ((DragonEggProperties)DragonEggProperties.MAP.get(dragonType)).getHatchTime());
+            nbt.putInt("HatchTime", DragonEggProperties.MAP.get(dragonType).getHatchTime());
             itemStack.setTag(nbt);
             Util.addLore(itemStack, "Feed this to a tamed Rooststalker to breed.");
             return itemStack;
@@ -78,20 +74,16 @@ public class DragonFeedItem extends Item {
     public static ItemStack getNextItemStalker(Entity parentCandidate, ItemStack stack) {
 
         boolean halfeaten = false;
-        if (!stack.hasTag()) {
-//            Util.chatPrint("Item has no tag, halfeaten is false", parentCandidate.level);
-        } else {
+        if (stack.hasTag()) {
             assert stack.getTag() != null;
             halfeaten = stack.getTag().getBoolean("HalfEaten");
-//            Util.chatPrint("Item has tag, halfeaten = " + halfeaten, parentCandidate.level);
         }
 
         if (halfeaten) {
-//            Util.chatPrint("Item is half-eaten, returning dragon egg", parentCandidate.level);
             ItemStack itemStack = new ItemStack(WRItems.DRAGON_EGG.get());
             CompoundNBT nbt = new CompoundNBT();
             nbt.putString("DragonType", EntityType.getKey(WREntities.ROOSTSTALKER.get()).toString());
-            nbt.putInt("HatchTime", ((DragonEggProperties)DragonEggProperties.MAP.get(WREntities.ROOSTSTALKER.get())).getHatchTime());
+            nbt.putInt("HatchTime", DragonEggProperties.MAP.get(WREntities.ROOSTSTALKER.get()).getHatchTime());
             itemStack.setTag(nbt);
             return itemStack;
         } else {

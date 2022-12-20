@@ -1,10 +1,7 @@
 package syric.wyrmroostpatch;
 
 import com.github.wolfshotz.wyrmroost.Wyrmroost;
-import com.github.wolfshotz.wyrmroost.entities.dragon.AlpineEntity;
-import com.github.wolfshotz.wyrmroost.registry.WREntities;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Rarity;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;

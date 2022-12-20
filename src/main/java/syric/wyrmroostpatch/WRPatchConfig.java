@@ -1,7 +1,6 @@
 package syric.wyrmroostpatch;
 
 import net.minecraftforge.common.ForgeConfigSpec;
-import org.lwjgl.system.CallbackI;
 
 public final class WRPatchConfig {
 
