@@ -53,13 +53,12 @@ public class WRPatchEvents {
             }
 
             if (isDragonFeedItem(item)) {
+                //Check valid breeding (rooststalkers).
+                //i.e. item is gold nugget, entity is rooststalker, breedcount is below cap, tamed by player, not same dragon
                 if (item.equals(Items.GOLD_NUGGET)) {
                     if (entity.getType() == WREntities.ROOSTSTALKER.get()) {
                         assert entity instanceof AbstractDragonEntity;
                         dragonEntity = (AbstractDragonEntity) entity;
-                        if (event.getSide() == LogicalSide.SERVER) {
-//                            Util.chatPrint("Breedcount: " + dragonEntity.breedCount, world);
-                        }
                         boolean canBreed = dragonEntity.breedCount < Util.getBreedCap(dragonEntity.getType()) || !WRPatchConfig.enableBreedCaps.get();
                         boolean isTamed = dragonEntity.getOwner() == event.getPlayer();
                         if (canBreed && isTamed) {
@@ -69,15 +68,13 @@ public class WRPatchEvents {
                             }
                         }
                     }
+                //Check valid breeding (everything else)
+                //i.e. item and dragon types match, breedcount is below cap, tamed by player, not same dragon
                 } else {
                     feedItem = (DragonFeedItem) item;
                     if (entity.getType() == feedItem.getDragonType()) {
                         assert entity instanceof AbstractDragonEntity;
                         dragonEntity = (AbstractDragonEntity) entity;
-
-                        if (event.getSide() == LogicalSide.SERVER) {
-//                            Util.chatPrint("Breedcount: " + dragonEntity.breedCount, world);
-                        }
 
                         boolean canBreed = dragonEntity.breedCount < Util.getBreedCap(dragonEntity.getType()) || !WRPatchConfig.enableBreedCaps.get();
                         boolean isTamed = dragonEntity.getOwner() == event.getPlayer();
@@ -125,7 +122,7 @@ public class WRPatchEvents {
                     dragonEntity.breedCount++;
 
                     Random random = new Random();
-                    world.playSound((PlayerEntity)null, entity.getX(), entity.getY(), entity.getZ(), itemStack.getEatingSound(), SoundCategory.NEUTRAL, 1.0F, 1.0F + (random.nextFloat() - random.nextFloat()) * 0.4F);
+                    world.playSound((PlayerEntity)null, entity.getX(), entity.getY(), entity.getZ(), itemStack.getEatingSound(), SoundCategory.NEUTRAL, 1.0F, 0.8F + (random.nextFloat() - random.nextFloat()) * 0.4F);
 
                 } else if (event.getSide() == LogicalSide.CLIENT) {
                     dragonEntity.eat(itemStack);
@@ -139,19 +136,6 @@ public class WRPatchEvents {
                 event.setCanceled(true);
             }
 
-    }
-
-    public static void cancelRooststalkers(PlayerInteractEvent.EntityInteractSpecific event) {
-        if (event.getSide() == LogicalSide.SERVER) {
-//            Util.chatPrint("cancelRooststalkers checked", event.getEntity().level);
-        }
-        if (event.getTarget() instanceof RoostStalkerEntity) {
-//            Util.chatPrint("No interacting with rooststalkers allowed", event.getEntity().level);
-            event.setCanceled(true);
-            event.setResult(Event.Result.DENY);
-        } else {
-//            Util.chatPrint("entity not a rooststalker. it is a " + event.getTarget().getType(), event.getEntity().level);
-        }
     }
 
 

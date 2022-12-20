@@ -2,7 +2,7 @@
 //DONE: breeding achievement pops only on completed breeding
 
 //DONE: butterfly leviathans?
-//TODO: textures
+//DONE: textures
 //DONE: remove chat prints
 //DONE: improve rooststalker nugget names
 //TODO: Rooststalker nugget description
@@ -12,3 +12,5 @@
 //TODO: logo
 
 //DONE: eating sound
+
+//FAILED: Royal Red roar

@@ -41,6 +41,8 @@ public class Util {
             return WRPatchConfig.alpineBreedCap.get();
         } else if (type == WREntities.ROOSTSTALKER.get()) {
             return WRPatchConfig.rooststalkerBreedCap.get();
+        } else if (type == WREntities.BUTTERFLY_LEVIATHAN.get()) {
+            return WRPatchConfig.leviathanBreedCap.get();
         } else {
             return 0;
         }

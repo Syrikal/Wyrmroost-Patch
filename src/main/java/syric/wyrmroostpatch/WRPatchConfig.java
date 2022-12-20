@@ -30,6 +30,7 @@ public final class WRPatchConfig {
     public static final ForgeConfigSpec.ConfigValue<Boolean> enableBreedCaps;
     public static final ForgeConfigSpec.ConfigValue<Integer> alpineBreedCap;
     public static final ForgeConfigSpec.ConfigValue<Integer> rooststalkerBreedCap;
+    public static final ForgeConfigSpec.ConfigValue<Integer> leviathanBreedCap;
 
 
 
@@ -61,6 +62,7 @@ public final class WRPatchConfig {
         enableBreedCaps = COMMON_BUILDER.comment("Whether alpines and rooststalkers have a limit on the number of times they can breed. Default: true").define("Enable Breed Caps", true);
         alpineBreedCap = COMMON_BUILDER.comment("Alpine dragon breed cap. Default: 3").defineInRange("Alpine Breed Cap", 3, 1, 10000);
         rooststalkerBreedCap = COMMON_BUILDER.comment("Rooststalker breed cap. Default: 5").defineInRange("Rooststalker Breed Cap", 5, 1, 10000);
+        leviathanBreedCap = COMMON_BUILDER.comment("Butterfly Leviathan breed cap. Default: 3").defineInRange("Butterfly Leviathan Breed Cap", 3, 1, 10000);
         COMMON_BUILDER.pop();
 
         CLIENT_SPEC = CLIENT_BUILDER.build();

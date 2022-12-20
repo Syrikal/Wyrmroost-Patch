@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "wyrmroostpatch:item/half_alpine_feed"
+    "layer0": "wyrmroostpatch:item/half_honey_treat"
   }
 }

@@ -3,8 +3,13 @@ package syric.wyrmroostpatch;
 import com.github.wolfshotz.wyrmroost.entities.dragon.AbstractDragonEntity;
 import com.github.wolfshotz.wyrmroost.registry.WREntities;
 import com.github.wolfshotz.wyrmroost.registry.WRSounds;
+import net.minecraft.client.audio.ISound;
+import net.minecraft.client.audio.SimpleSound;
+import net.minecraft.client.audio.Sound;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
+import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -12,6 +17,8 @@ import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.GL;
 
 import java.util.*;
+
+import static syric.wyrmroostpatch.Util.chatPrint;
 
 public class Shushing {
 
@@ -171,10 +178,23 @@ public class Shushing {
         if (ALL_SOUNDS.contains(event.getSound())) {
             event.setVolume((float) (event.getVolume() * calculateMultiplier(event.getSound())));
             if (event.getSound().equals(WRSounds.ENTITY_ROYALRED_ROAR.get())) {
-                Util.chatPrint("royal red roar", event.getEntity().level);
+                chatPrint("royal red roar", event.getEntity().level);
             }
         }
     }
+
+    //Doesn't work unfortunately
+    public static void shushRR(PlaySoundEvent event) {
+        if (!event.getSound().getLocation().equals(WRSounds.ENTITY_ROYALRED_ROAR.get().getLocation())) {
+            return;
+        } else {
+            ISound sound = event.getSound();
+//            SimpleSound replacement = new SimpleSound(WRSounds.ENTITY_ROYALRED_ROAR.get().getLocation(), SoundCategory.NEUTRAL, (float) (sound.getVolume() * calculateMultiplier(WRSounds.ENTITY_ROYALRED_ROAR.get())), sound.getPitch(), sound.isLooping(), sound.getDelay(), sound.getAttenuation(), sound.getX(), sound.getY(), sound.getZ(), sound.isRelative());
+            SimpleSound replacement = new SimpleSound(WRSounds.ENTITY_ROYALRED_ROAR.get().getLocation(), SoundCategory.NEUTRAL, (float) (sound.getVolume() * 0.1), sound.getPitch(), sound.isLooping(), sound.getDelay(), sound.getAttenuation(), sound.getX(), sound.getY(), sound.getZ(), sound.isRelative());
+            event.setResultSound(replacement);
+        }
+    }
+
 
     private static Double calculateMultiplier(SoundEvent sound) {
         Random random = new Random();

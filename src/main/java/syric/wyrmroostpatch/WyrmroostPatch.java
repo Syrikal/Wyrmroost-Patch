@@ -3,6 +3,7 @@ package syric.wyrmroostpatch;
 import com.github.wolfshotz.wyrmroost.registry.WREntities;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
@@ -67,6 +68,10 @@ public class WyrmroostPatch
         if (WRPatchConfig.enableShush.get()) {
             Shushing.init();
             MinecraftForge.EVENT_BUS.addListener(this::shush);
+            //Royal red roars don't work. This is a failed attempt to make them work.
+//            if (WRPatchConfig.roarMult.get() != 1 || WRPatchConfig.royalredMult.get() != 1) {
+//                MinecraftForge.EVENT_BUS.addListener(this::shushRR);
+//            }
         }
 
     }
@@ -93,14 +98,13 @@ public class WyrmroostPatch
     private void interactEntity(PlayerInteractEvent.EntityInteract event) {
         WRPatchEvents.interactEntity(event);
     }
-
-    private void cancelRooststalkers(PlayerInteractEvent.EntityInteractSpecific event) {
-        WRPatchEvents.cancelRooststalkers(event);
-    }
-
     private void shush(PlaySoundAtEntityEvent event) {
         Shushing.shush(event);
     }
+    private void shushRR(PlaySoundEvent event) {
+        Shushing.shushRR(event);
+    }
+
 
 
 
