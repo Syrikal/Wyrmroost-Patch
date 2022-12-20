@@ -22,14 +22,15 @@ public class WRPatchItems {
 
     // register items
     public static final RegistryObject<Item> ALPINE_FEED = ITEMS.register("alpine_feed",
-            () -> new DragonFeedItem(new Item.Properties().stacksTo(1).tab(Wyrmroost.ITEM_GROUP).rarity(Rarity.UNCOMMON), false));
+            () -> new DragonFeedItem(new Item.Properties().tab(Wyrmroost.ITEM_GROUP).rarity(Rarity.UNCOMMON), false));
     public static final RegistryObject<Item> HALF_ALPINE_FEED = ITEMS.register("half_alpine_feed",
-            () -> new DragonFeedItem(new Item.Properties().stacksTo(1).tab(Wyrmroost.ITEM_GROUP).rarity(Rarity.UNCOMMON), true));
+            () -> new DragonFeedItem(new Item.Properties().tab(Wyrmroost.ITEM_GROUP).rarity(Rarity.UNCOMMON), true));
 
-    public static final RegistryObject<Item> ROOST_FEED = ITEMS.register("roost_feed",
-            () -> new DragonFeedItem(new Item.Properties().stacksTo(1).tab(Wyrmroost.ITEM_GROUP).rarity(Rarity.UNCOMMON), false));
-    public static final RegistryObject<Item> HALF_ROOST_FEED = ITEMS.register("half_roost_feed",
-            () -> new DragonFeedItem(new Item.Properties().stacksTo(1).tab(Wyrmroost.ITEM_GROUP).rarity(Rarity.UNCOMMON), true));
+    public static final RegistryObject<Item> BFL_FEED = ITEMS.register("bfl_feed",
+            () -> new DragonFeedItem(new Item.Properties().tab(Wyrmroost.ITEM_GROUP).rarity(Rarity.UNCOMMON), false));
+    public static final RegistryObject<Item> HALF_BFL_FEED = ITEMS.register("half_bfl_feed",
+            () -> new DragonFeedItem(new Item.Properties().tab(Wyrmroost.ITEM_GROUP).rarity(Rarity.UNCOMMON), true));
+
 
     public static final RegistryObject<Item> BREED_RESETTER = ITEMS.register("breed_resetter",
             () -> new Item(new Item.Properties().tab(Wyrmroost.ITEM_GROUP)));

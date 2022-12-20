@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "wyrmroostpatch:item/half_rooststalker_feed"
-  }
-}

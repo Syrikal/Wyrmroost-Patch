@@ -5,12 +5,18 @@ import com.github.wolfshotz.wyrmroost.registry.WREntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraft.item.Item;
+import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.extensions.IForgeWorldServer;
 
+import javax.annotation.Nullable;
 import java.util.List;
+import java.util.UUID;
 
 public class Util {
 
@@ -43,5 +49,17 @@ public class Util {
     public static boolean isDragonFeedItem(Item item) {
         return (item instanceof DragonFeedItem) || item.equals(Items.GOLD_NUGGET);
     }
+
+    public static void addLore(ItemStack itemStack, String lore) {
+        ITextComponent textComponent = ITextComponent.nullToEmpty(lore);
+        CompoundNBT compoundnbt = itemStack.getOrCreateTagElement("display");
+        if (lore != null) {
+            compoundnbt.putString("Lore", ITextComponent.Serializer.toJson(textComponent));
+        } else {
+            compoundnbt.remove("Lore");
+        }
+//        return itemStack;
+    }
+
 
 }

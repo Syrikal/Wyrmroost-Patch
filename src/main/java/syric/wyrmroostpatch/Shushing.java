@@ -1,6 +1,9 @@
 package syric.wyrmroostpatch;
 
+import com.github.wolfshotz.wyrmroost.entities.dragon.AbstractDragonEntity;
+import com.github.wolfshotz.wyrmroost.registry.WREntities;
 import com.github.wolfshotz.wyrmroost.registry.WRSounds;
+import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
 import net.minecraftforge.fml.RegistryObject;
@@ -161,15 +164,16 @@ public class Shushing {
     }
 
     public static void shush(PlaySoundAtEntityEvent event) {
-//        DeferredRegister<SoundEvent> wrreg = WRSounds.REGISTRY;
+        //Alt faster version that doesn't account for some species (ldw, coin dragon)
+//        if (!(event.getEntity() instanceof AbstractDragonEntity)) {
+//            return;
+//        }
         if (ALL_SOUNDS.contains(event.getSound())) {
             event.setVolume((float) (event.getVolume() * calculateMultiplier(event.getSound())));
+            if (event.getSound().equals(WRSounds.ENTITY_ROYALRED_ROAR.get())) {
+                Util.chatPrint("royal red roar", event.getEntity().level);
+            }
         }
-//        for (RegistryObject<SoundEvent> reg : wrreg.getEntries()) {
-//            if (event.getSound().equals(reg.get())) {
-//                event.setVolume((float) (event.getVolume() * calculateMultiplier(event.getSound())));
-//            }
-//        }
     }
 
     private static Double calculateMultiplier(SoundEvent sound) {

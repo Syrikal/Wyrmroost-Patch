@@ -2,14 +2,14 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "minecraft:honey_bottle"
+      "item": "minecraft:kelp"
     },
     {
-      "item": "minecraft:honeycomb"
+      "item": "minecraft:porkchop"
     }
   ],
   "result": {
-    "item": "wyrmroostpatch:alpine_feed",
+    "item": "wyrmroostpatch:bfl_feed",
     "count": 1
   }
 }

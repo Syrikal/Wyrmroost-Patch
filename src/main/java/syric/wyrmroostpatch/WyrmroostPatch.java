@@ -60,8 +60,9 @@ public class WyrmroostPatch
     private void setup(final FMLCommonSetupEvent event) {
         ((DragonFeedItem) WRPatchItems.ALPINE_FEED.get()).setDragonType(WREntities.ALPINE.get());
         ((DragonFeedItem) WRPatchItems.HALF_ALPINE_FEED.get()).setDragonType(WREntities.ALPINE.get());
-        ((DragonFeedItem) WRPatchItems.ROOST_FEED.get()).setDragonType(WREntities.ROOSTSTALKER.get());
-        ((DragonFeedItem) WRPatchItems.HALF_ROOST_FEED.get()).setDragonType(WREntities.ROOSTSTALKER.get());
+        ((DragonFeedItem) WRPatchItems.BFL_FEED.get()).setDragonType(WREntities.BUTTERFLY_LEVIATHAN.get());
+        ((DragonFeedItem) WRPatchItems.HALF_BFL_FEED.get()).setDragonType(WREntities.BUTTERFLY_LEVIATHAN.get());
+
 
         if (WRPatchConfig.enableShush.get()) {
             Shushing.init();
