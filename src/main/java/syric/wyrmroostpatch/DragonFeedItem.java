@@ -14,10 +14,12 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
+import com.github.wolfshotz.wyrmroost.items.DragonEggItem;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -97,10 +99,16 @@ public class DragonFeedItem extends Item {
             CompoundNBT nbt = new CompoundNBT();
             nbt.putUUID("FirstParent", parentCandidate.getUUID());
             nbt.putBoolean("HalfEaten", true);
+//            CompoundNBT nbt2 = stack.getOrCreateTagElement("display");
+//            nbt2.putString("Lore", ITextComponent.Serializer.toJson(new StringTextComponent("Test")));
+
 
             ItemStack output = Items.GOLD_NUGGET.getDefaultInstance();
             output.setTag(nbt);
-            output.setHoverName(ITextComponent.nullToEmpty("Half-Eaten Gold Nugget"));
+//            output.setTag(nbt2);
+            output.setHoverName(new TranslationTextComponent("item.wyrmroostpatch.halfnugget", new Object[]{}).withStyle(TextFormatting.YELLOW));
+
+//            output.setHoverName(ITextComponent.nullToEmpty("Half-Eaten Gold Nugget"));
 //            Util.addLore(output, "Feed this to a tamed Rooststalker to breed.");
             return output;
         }
