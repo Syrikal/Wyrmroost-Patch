@@ -36,7 +36,7 @@ public final class WRPatchConfig {
 
     static {
         CLIENT_BUILDER.push("Enable Shush Mode");
-        enableShush = CLIENT_BUILDER.comment("This mode allows modification of Wyrmroost sounds' volumes.\nAll applicable multipliers are applied to a given sound. If you have the global\nmultiplier set to 0.5, the roar multiplier set to 0.8, and the Alpine multiplier\nset to 0.25, then Alpine dragons' roars will be at 0.5*0.8*0.25 = 10% volume.\n\nEnable Shush Mode. Default: false").define("Shush Mode", false);
+        enableShush = CLIENT_BUILDER.comment("This mode allows modification of Wyrmroost sounds' volumes.\nAll applicable multipliers are applied to a given sound. If you have the global\nmultiplier set to 0.5, the roar multiplier set to 0.8, and the Alpine multiplier\nset to 0.25, then Alpine dragons' roars will be at 0.5*0.8*0.25 = 10% volume.\n\nThis feature may produce lag.\n\nEnable Shush Mode. Default: false").define("Shush Mode", false);
         CLIENT_BUILDER.pop();
 
         CLIENT_BUILDER.push("Shush Mode Volume Multipliers");
