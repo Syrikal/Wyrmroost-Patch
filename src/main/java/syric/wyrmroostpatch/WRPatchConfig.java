@@ -25,6 +25,8 @@ public final class WRPatchConfig {
 
     public static final ForgeConfigSpec.ConfigValue<Double> idleCancel;
 
+    public static final ForgeConfigSpec.ConfigValue<Boolean> tooltipFix;
+
 
     public static final ForgeConfigSpec.ConfigValue<Boolean> enableBreedCaps;
     public static final ForgeConfigSpec.ConfigValue<Integer> alpineBreedCap;
@@ -56,6 +58,11 @@ public final class WRPatchConfig {
         CLIENT_BUILDER.push("Idle Sound Reducer");
         idleCancel = CLIENT_BUILDER.comment("Chance that idle sounds will be cancelled. Default: 0").defineInRange("Idle Sound Cancellation Chance", 0.0, 0.0, 1);
         CLIENT_BUILDER.pop();
+
+        CLIENT_BUILDER.push("Fixed Rooststalker Tooltip");
+        tooltipFix = CLIENT_BUILDER.comment("Fixes tooltip for half-eaten gold nuggets. Produces negligible performance hit. Default: true").define("Fixed Rooststalker Tooltip", true);
+        CLIENT_BUILDER.pop();
+
 
         COMMON_BUILDER.push("Breed Caps");
         enableBreedCaps = COMMON_BUILDER.comment("Whether alpines and rooststalkers have a limit on the number of times they can breed. Default: true").define("Enable Breed Caps", true);

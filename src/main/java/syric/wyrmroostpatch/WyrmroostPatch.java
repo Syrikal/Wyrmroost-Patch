@@ -2,10 +2,12 @@ package syric.wyrmroostpatch;
 
 import com.github.wolfshotz.wyrmroost.registry.WREntities;
 import net.minecraft.block.Block;
+import net.minecraftforge.client.event.RenderTooltipEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -49,7 +51,6 @@ public class WyrmroostPatch
 
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
         forgeEventBus.addListener(this::interactEntity);
-//        forgeEventBus.addListener(this::cancelRooststalkers);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, WRPatchConfig.CLIENT_SPEC, "wyrmroostpatch-client.toml");
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, WRPatchConfig.COMMON_SPEC, "wyrmroostpatch-common.toml");
@@ -70,6 +71,9 @@ public class WyrmroostPatch
 //            if (WRPatchConfig.roarMult.get() != 1 || WRPatchConfig.royalredMult.get() != 1) {
 //                MinecraftForge.EVENT_BUS.addListener(this::shushRR);
 //            }
+        }
+        if (WRPatchConfig.tooltipFix.get()) {
+            MinecraftForge.EVENT_BUS.addListener(this::renderNuggetTooltip);
         }
 
     }
@@ -102,6 +106,7 @@ public class WyrmroostPatch
     private void shushRR(PlaySoundEvent event) {
         Shushing.shushRR(event);
     }
+    private void renderNuggetTooltip(ItemTooltipEvent event) { RenderTooltip.renderTooltip(event); }
 
 
 

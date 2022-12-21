@@ -5,7 +5,7 @@
 //DONE: textures
 //DONE: remove chat prints
 //DONE: improve rooststalker nugget names
-//TODO: Rooststalker nugget description
+//DONE: Rooststalker nugget description
 //DONE: change half-eaten descriptions
 
 //DONE: rename feed items

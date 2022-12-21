@@ -4,5 +4,6 @@
   "item.wyrmroostpatch.bfl_feed": "Kelp-Wrapped Meat",
   "item.wyrmroostpatch.half_bfl_feed": "Half-Eaten Kelp-Wrapped Meat",
   "item.wyrmroostpatch.breed_resetter": "Breed Counter Resetting Stick",
-  "item.wyrmroostpatch.halfnugget": "Half-Eaten Gold Nugget"
+  "item.wyrmroostpatch.halfnugget": "Half-Eaten Gold Nugget",
+  "item.wyrmroostpatch.halfnugget.tooltip": "Feed this to another Rooststalker to breed it."
 }
