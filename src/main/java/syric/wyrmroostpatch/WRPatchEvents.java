@@ -18,6 +18,7 @@ import net.minecraftforge.fml.LogicalSide;
 
 import java.util.Random;
 
+import static syric.wyrmroostpatch.Util.chatPrint;
 import static syric.wyrmroostpatch.Util.isDragonFeedItem;
 
 public class WRPatchEvents {
@@ -55,6 +56,9 @@ public class WRPatchEvents {
                             if (notSameDragon) {
                                 breedSuccess = true;
                             }
+                        } else if (!canBreed) {
+                            world.broadcastEntityEvent(dragonEntity, (byte)6);
+//                            chatPrint("Failed to breed", dragonEntity.level);
                         }
                     }
                 //Check valid breeding (everything else)
@@ -72,6 +76,9 @@ public class WRPatchEvents {
                             if (notSameDragon) {
                                 breedSuccess = true;
                             }
+                        } else if (!canBreed) {
+                            world.broadcastEntityEvent(dragonEntity, (byte)6);
+//                            chatPrint("Failed to breed", dragonEntity.level);
                         }
                     }
                 }
