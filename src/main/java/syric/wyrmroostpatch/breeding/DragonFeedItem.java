@@ -156,28 +156,28 @@ public class DragonFeedItem extends Item {
     }
 
     public void appendHoverText(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-       tooltip.add((new StringTextComponent("Feed this to " + this.getDragonString(this.dragonType) + " to breed it.")));
+       tooltip.add(this.getTooltipText(this.dragonType));
     }
 
-    private String getDragonString(EntityType dragon) {
+    private ITextComponent getTooltipText(EntityType dragon) {
         if (dragon == null) {
-            return "nulldragon";
+            return new TranslationTextComponent("item.wyrmroostpatch.feed.tooltip_null").withStyle(TextFormatting.WHITE);
         }
         if (halfEaten) {
             if (dragon.equals(WREntities.ALPINE.get())) {
-                return "a second alpine dragon";
+                return new TranslationTextComponent("item.wyrmroostpatch.feed.tooltip_alp_half").withStyle(TextFormatting.WHITE);
             } else if (dragon.equals(WREntities.BUTTERFLY_LEVIATHAN.get())) {
-                return "a second butterfly leviathan";
+                return new TranslationTextComponent("item.wyrmroostpatch.feed.tooltip_bfl_half").withStyle(TextFormatting.WHITE);
             } else {
-                return "nothing in particular";
+                return new TranslationTextComponent("item.wyrmroostpatch.feed.tooltip_fail").withStyle(TextFormatting.WHITE);
             }
         } else {
             if (dragon.equals(WREntities.ALPINE.get())) {
-                return "an alpine dragon";
+                return new TranslationTextComponent("item.wyrmroostpatch.feed.tooltip_alp").withStyle(TextFormatting.WHITE);
             } else if (dragon.equals(WREntities.BUTTERFLY_LEVIATHAN.get())) {
-                return "a butterfly leviathan";
+                return new TranslationTextComponent("item.wyrmroostpatch.feed.tooltip_bfl").withStyle(TextFormatting.WHITE);
             } else {
-                return "nothing in particular";
+                return new TranslationTextComponent("item.wyrmroostpatch.feed.tooltip_fail").withStyle(TextFormatting.WHITE);
             }
         }
     }
