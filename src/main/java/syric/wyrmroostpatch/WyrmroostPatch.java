@@ -2,7 +2,6 @@ package syric.wyrmroostpatch;
 
 import com.github.wolfshotz.wyrmroost.registry.WREntities;
 import net.minecraft.block.Block;
-import net.minecraftforge.client.event.RenderTooltipEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -22,6 +21,9 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import syric.wyrmroostpatch.breeding.DragonFeedItem;
+import syric.wyrmroostpatch.breeding.RenderTooltip;
+import syric.wyrmroostpatch.shushing.Shushing;
 
 import java.util.stream.Collectors;
 

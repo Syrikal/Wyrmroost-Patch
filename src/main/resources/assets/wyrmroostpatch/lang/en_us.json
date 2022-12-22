@@ -5,5 +5,13 @@
   "item.wyrmroostpatch.half_bfl_feed": "Half-Eaten Kelp-Wrapped Meat",
   "item.wyrmroostpatch.breed_resetter": "Breed Counter Resetting Stick",
   "item.wyrmroostpatch.halfnugget": "Half-Eaten Gold Nugget",
-  "item.wyrmroostpatch.halfnugget.tooltip": "Feed this to another Rooststalker to breed it."
+  "item.wyrmroostpatch.halfnugget.tooltip": "Feed this to another Rooststalker to breed it.",
+  "item.wyrmroostpatch.sky_tincture": "Sky Alpine Tincture",
+  "item.wyrmroostpatch.raven_tincture": "Raven Alpine Tincture",
+  "item.wyrmroostpatch.honey_tincture": "Honey Alpine Tincture",
+  "item.wyrmroostpatch.mint_tincture": "Mint Alpine Tincture",
+  "item.wyrmroostpatch.rose_tincture": "Rose Alpine Tincture",
+  "item.wyrmroostpatch.snowy_tincture": "Snowy Alpine Tincture",
+  "item.wyrmroostpatch.tincture_tooltip": "Feed this to a tamed Alpine to change its color.",
+  "item.wyrmroostpatch.tincture_disabled": "Alpine recoloring is disabled by config."
 }

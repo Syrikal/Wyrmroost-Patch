@@ -1,6 +1,7 @@
 package syric.wyrmroostpatch;
 
 import com.github.wolfshotz.wyrmroost.entities.dragon.AbstractDragonEntity;
+import com.github.wolfshotz.wyrmroost.entities.dragon.AlpineEntity;
 import com.github.wolfshotz.wyrmroost.items.DragonEggItem;
 import com.github.wolfshotz.wyrmroost.registry.WREntities;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -10,11 +11,15 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.potion.Effect;
+import net.minecraft.potion.Effects;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.LogicalSide;
+import syric.wyrmroostpatch.breeding.DragonFeedItem;
+import syric.wyrmroostpatch.recoloring.AlpineTinctureItem;
 
 import java.util.Random;
 
@@ -128,6 +133,21 @@ public class WRPatchEvents {
                 ((AbstractDragonEntity) entity).breedCount = 0;
                 event.setCanceled(true);
             }
+
+            if (itemStack.getItem() instanceof AlpineTinctureItem && event.getSide() == LogicalSide.SERVER && entity instanceof AbstractDragonEntity) {
+                event.setCanceled(true);
+                dragonEntity = (AbstractDragonEntity) entity;
+                if (dragonEntity instanceof AlpineEntity && dragonEntity.getOwner() == event.getPlayer() && WRPatchConfig.enableAlpineRecoloring.get()) {
+                    dragonEntity.setVariant(((AlpineTinctureItem) itemStack.getItem()).color);
+                    if (!event.getPlayer().isCreative()) {
+                        itemStack.shrink(1);
+                    }
+                } else {
+                    world.broadcastEntityEvent(dragonEntity, (byte)6);
+                }
+
+            }
+
 
     }
 

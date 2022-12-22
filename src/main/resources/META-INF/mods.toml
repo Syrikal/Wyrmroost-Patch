@@ -35,9 +35,11 @@ authors="Syric" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
 Adds the ability to breed Alpines, Rooststalkers, and Butterfly Leviathans.
-Right-click them with a Honey Treat, Gold Nugget, orKelp-Wrapped Meat, respectively, and then right-click another with the half-eaten version.
+Right-click them with a Honey Treat, Gold Nugget, or Kelp-Wrapped Meat, respectively, and then right-click another with the half-eaten version.
 
-Also adds configurable options to reduce the volume and frequency of some wyrmroost sounds.
+Adds tinctures that allow changing an alpine's variant.
+
+Adds configurable options to reduce the volume and frequency of some wyrmroost sounds.
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.wyrmroostpatch]] #optional

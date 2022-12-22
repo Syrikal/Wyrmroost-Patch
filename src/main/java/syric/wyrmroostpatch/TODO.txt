@@ -14,3 +14,5 @@
 //DONE: eating sound
 
 //FAILED: Royal Red roar
+
+//TODO: rename alpine variants according to official names

@@ -7,6 +7,8 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import syric.wyrmroostpatch.breeding.DragonFeedItem;
+import syric.wyrmroostpatch.recoloring.AlpineTinctureItem;
 
 public class WRPatchItems {
     // create DeferredRegister object
@@ -31,5 +33,18 @@ public class WRPatchItems {
 
     public static final RegistryObject<Item> BREED_RESETTER = ITEMS.register("breed_resetter",
             () -> new Item(new Item.Properties().tab(Wyrmroost.ITEM_GROUP)));
+
+    public static final RegistryObject<Item> SKY_ALPINE_TINCTURE = ITEMS.register("sky_tincture",
+            () -> new AlpineTinctureItem(new Item.Properties().tab(Wyrmroost.ITEM_GROUP), 0));
+    public static final RegistryObject<Item> RAVEN_ALPINE_TINCTURE = ITEMS.register("raven_tincture",
+            () -> new AlpineTinctureItem(new Item.Properties().tab(Wyrmroost.ITEM_GROUP), 1));
+    public static final RegistryObject<Item> HONEY_ALPINE_TINCTURE = ITEMS.register("honey_tincture",
+            () -> new AlpineTinctureItem(new Item.Properties().tab(Wyrmroost.ITEM_GROUP), 2));
+    public static final RegistryObject<Item> MINT_ALPINE_TINCTURE = ITEMS.register("mint_tincture",
+            () -> new AlpineTinctureItem(new Item.Properties().tab(Wyrmroost.ITEM_GROUP), 3));
+    public static final RegistryObject<Item> ROSE_ALPINE_TINCTURE = ITEMS.register("rose_tincture",
+            () -> new AlpineTinctureItem(new Item.Properties().tab(Wyrmroost.ITEM_GROUP), 4));
+    public static final RegistryObject<Item> SNOWY_ALPINE_TINCTURE = ITEMS.register("snowy_tincture",
+            () -> new AlpineTinctureItem(new Item.Properties().tab(Wyrmroost.ITEM_GROUP), 5));
 
 }

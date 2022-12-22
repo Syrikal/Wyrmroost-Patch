@@ -1,4 +1,4 @@
-package syric.wyrmroostpatch;
+package syric.wyrmroostpatch.breeding;
 
 import com.github.wolfshotz.wyrmroost.entities.dragon.AbstractDragonEntity;
 import com.github.wolfshotz.wyrmroost.entities.dragonegg.DragonEggProperties;
@@ -17,6 +17,9 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import syric.wyrmroostpatch.Util;
+import syric.wyrmroostpatch.WRPatchConfig;
+import syric.wyrmroostpatch.WRPatchItems;
 
 import javax.annotation.Nullable;
 import java.util.List;

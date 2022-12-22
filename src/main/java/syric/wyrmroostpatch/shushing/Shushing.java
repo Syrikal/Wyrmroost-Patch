@@ -1,4 +1,4 @@
-package syric.wyrmroostpatch;
+package syric.wyrmroostpatch.shushing;
 
 import com.github.wolfshotz.wyrmroost.registry.WRSounds;
 import net.minecraft.client.audio.ISound;
@@ -7,6 +7,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
+import syric.wyrmroostpatch.WRPatchConfig;
 
 import java.util.*;
 
