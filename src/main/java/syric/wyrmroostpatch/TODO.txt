@@ -9,10 +9,11 @@
 //DONE: change half-eaten descriptions
 
 //DONE: rename feed items
-//TODO: logo
+//DONE: logo
+//TODO: go through mods.toml
 
 //DONE: eating sound
 
 //FAILED: Royal Red roar
 
-//TODO: rename alpine variants according to official names
+//DONE: rename alpine variants according to official names
