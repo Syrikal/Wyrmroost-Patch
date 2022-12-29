@@ -170,9 +170,9 @@ public class Shushing {
 //        }
         if (ALL_SOUNDS.contains(event.getSound())) {
             event.setVolume((float) (event.getVolume() * calculateMultiplier(event.getSound())));
-            if (event.getSound().equals(WRSounds.ENTITY_ROYALRED_ROAR.get())) {
-                chatPrint("royal red roar", event.getEntity().level);
-            }
+//            if (event.getSound().equals(WRSounds.ENTITY_ROYALRED_ROAR.get())) {
+//                chatPrint("royal red roar", event.getEntity().level);
+//            }
         }
     }
 
