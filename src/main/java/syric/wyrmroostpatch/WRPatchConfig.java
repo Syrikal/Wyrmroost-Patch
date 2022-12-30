@@ -39,7 +39,7 @@ public final class WRPatchConfig {
 
     static {
         CLIENT_BUILDER.push("Enable Shush Mode");
-        enableShush = CLIENT_BUILDER.comment("This mode allows modification of Wyrmroost sounds' volumes.\nAll applicable multipliers are applied to a given sound. If you have the global\nmultiplier set to 0.5, the roar multiplier set to 0.8, and the Alpine multiplier\nset to 0.25, then Alpine dragons' roars will be at 0.5*0.8*0.25 = 10% volume.\n\nThis feature may produce lag.\n\nEnable Shush Mode. Default: false").define("Shush Mode", false);
+        enableShush = CLIENT_BUILDER.comment("This mode allows modification of Wyrmroost sounds' volumes.\nAll applicable multipliers are applied to a given sound. If you have the global\nmultiplier set to 0.5, the roar multiplier set to 0.8, and the Alpine multiplier\nset to 0.25, then Alpine dragons' roars will be at 0.5*0.8*0.25 = 10% volume.\n\nThis feature may produce minor lag.\n\nEnable Shush Mode. Default: false").define("Shush Mode", false);
         CLIENT_BUILDER.pop();
 
         CLIENT_BUILDER.push("Shush Mode Volume Multipliers");
@@ -68,9 +68,9 @@ public final class WRPatchConfig {
 
         COMMON_BUILDER.push("Breed Caps");
         enableBreedCaps = COMMON_BUILDER.comment("Whether alpines, rooststalkers, and butterfly leviathans have a limit on the number of times they can breed. Default: true").define("Enable Breed Caps", true);
-        alpineBreedCap = COMMON_BUILDER.comment("Alpine dragon breed cap. Default: 3").defineInRange("Alpine Breed Cap", 3, 1, 10000);
-        rooststalkerBreedCap = COMMON_BUILDER.comment("Rooststalker breed cap. Default: 5").defineInRange("Rooststalker Breed Cap", 5, 1, 10000);
-        leviathanBreedCap = COMMON_BUILDER.comment("Butterfly Leviathan breed cap. Default: 3").defineInRange("Butterfly Leviathan Breed Cap", 3, 1, 10000);
+        alpineBreedCap = COMMON_BUILDER.comment("Alpine dragon breed cap. Set to 0 to disable. Default: 3").defineInRange("Alpine Breed Cap", 3, 0, 10000);
+        rooststalkerBreedCap = COMMON_BUILDER.comment("Rooststalker breed cap. Set to 0 to disable. Default: 5").defineInRange("Rooststalker Breed Cap", 5, 0, 10000);
+        leviathanBreedCap = COMMON_BUILDER.comment("Butterfly Leviathan breed cap. Set to 0 to disable. Default: 3").defineInRange("Butterfly Leviathan Breed Cap", 3, 0, 10000);
         COMMON_BUILDER.pop();
 
         COMMON_BUILDER.push("Alpine Recoloring");

@@ -11,8 +11,6 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.Effects;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
@@ -23,7 +21,6 @@ import syric.wyrmroostpatch.recoloring.AlpineTinctureItem;
 
 import java.util.Random;
 
-import static syric.wyrmroostpatch.Util.chatPrint;
 import static syric.wyrmroostpatch.Util.isDragonFeedItem;
 
 public class WRPatchEvents {
@@ -74,7 +71,7 @@ public class WRPatchEvents {
                         assert entity instanceof AbstractDragonEntity;
                         dragonEntity = (AbstractDragonEntity) entity;
 
-                        boolean canBreed = dragonEntity.breedCount < Util.getBreedCap(dragonEntity.getType()) || !WRPatchConfig.enableBreedCaps.get();
+                        boolean canBreed = dragonEntity.breedCount < Util.getBreedCap(dragonEntity.getType()) || !WRPatchConfig.enableBreedCaps.get() || Util.getBreedCap(dragonEntity.getType()) == 0;
                         boolean isTamed = dragonEntity.getOwner() == event.getPlayer();
                         if (canBreed && isTamed) {
                             boolean notSameDragon = ((DragonFeedItem) item).checkTarget(dragonEntity, itemStack);
@@ -141,6 +138,7 @@ public class WRPatchEvents {
                     dragonEntity.setVariant(((AlpineTinctureItem) itemStack.getItem()).color);
                     if (!event.getPlayer().isCreative()) {
                         itemStack.shrink(1);
+                        event.getPlayer().addItem(new ItemStack(Items.BOWL));
                     }
                 } else {
                     world.broadcastEntityEvent(dragonEntity, (byte)6);
@@ -148,9 +146,6 @@ public class WRPatchEvents {
 
             }
 
-
     }
-
-
 
 }

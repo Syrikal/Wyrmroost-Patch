@@ -10,7 +10,7 @@
 
 //DONE: rename feed items
 //DONE: logo
-//TODO: go through mods.toml
+//DONE: go through mods.toml
 
 //DONE: eating sound
 
