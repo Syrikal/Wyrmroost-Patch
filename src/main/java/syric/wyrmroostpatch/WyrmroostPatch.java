@@ -74,15 +74,16 @@ public class WyrmroostPatch
 //                MinecraftForge.EVENT_BUS.addListener(this::shushRR);
 //            }
         }
-        if (WRPatchConfig.tooltipFix.get()) {
-            MinecraftForge.EVENT_BUS.addListener(this::renderNuggetTooltip);
-        }
+
 
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
         LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().options);
+        if (WRPatchConfig.tooltipFix.get()) {
+            MinecraftForge.EVENT_BUS.addListener(this::renderNuggetTooltip);
+        }
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
