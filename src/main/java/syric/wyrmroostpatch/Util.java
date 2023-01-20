@@ -9,7 +9,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
+import org.lwjgl.system.CallbackI;
 import syric.wyrmroostpatch.breeding.DragonFeedItem;
 
 import java.util.List;
@@ -49,14 +51,10 @@ public class Util {
     }
 
     public static void addLore(ItemStack itemStack, String lore) {
-        ITextComponent textComponent = ITextComponent.nullToEmpty(lore);
+        StringTextComponent textComponent = new StringTextComponent(lore);
         CompoundNBT compoundnbt = itemStack.getOrCreateTagElement("display");
-        if (lore != null) {
-            compoundnbt.putString("Lore", ITextComponent.Serializer.toJson(textComponent));
-        } else {
-            compoundnbt.remove("Lore");
-        }
-//        return itemStack;
+        compoundnbt.putString("Lore", ITextComponent.Serializer.toJson(textComponent));
+        //        return itemStack;
     }
 
 
