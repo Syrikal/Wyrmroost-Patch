@@ -6,7 +6,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
 import syric.wyrmroostpatch.WRPatchConfig;
-import syric.wyrmroostpatch.WyrmroostPatch;
 
 import java.util.*;
 
@@ -219,6 +218,7 @@ public class Shushing {
         if (sound == null) {
             return 1.0;
         }
+
         Random random = new Random();
         if (WRPatchConfig.idleCancel.get() != 0 && IDLES.contains(sound) && random.nextDouble() < WRPatchConfig.idleCancel.get()) {
             return 0.0;
@@ -238,8 +238,14 @@ public class Shushing {
                 break;
             }
         }
+        if (sound.equals(WRSounds.WING_FLAP.get())) {
+            species = WRPatchConfig.flapMult.get() * (WRPatchConfig.monoResourcePackMode.get() ? 2.0 : 1.0);
+        }
+        if (sound.equals(WRSounds.FIRE_BREATH.get())) {
+            species = WRPatchConfig.fireMult.get();
+        }
 
-        WyrmroostPatch.LOGGER.info("Set sound multiplier for " + sound.getLocation() + " to: " + global * species * roar);
+//        WyrmroostPatch.LOGGER.info("Set sound multiplier for " + sound.getLocation() + " to: " + global * species * roar);
         return global * species * roar;
     }
 

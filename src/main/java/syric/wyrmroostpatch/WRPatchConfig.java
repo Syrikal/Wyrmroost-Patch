@@ -23,6 +23,8 @@ public final class WRPatchConfig {
     public static final ForgeConfigSpec.ConfigValue<Double> desertwyrmMult;
     public static final ForgeConfigSpec.ConfigValue<Double> coindragonMult;
     public static final ForgeConfigSpec.ConfigValue<Double> dragonfruitMult;
+    public static final ForgeConfigSpec.ConfigValue<Double> flapMult;
+    public static final ForgeConfigSpec.ConfigValue<Double> fireMult;
 
     public static final ForgeConfigSpec.ConfigValue<Double> idleCancel;
 
@@ -57,6 +59,8 @@ public final class WRPatchConfig {
         desertwyrmMult = CLIENT_BUILDER.comment("Multiplier for Lesser Desertwyrm noises. Default: 1").defineInRange("Lesser Desertwyrm Multiplier", 1.0F, 0.0F, 20F);
         coindragonMult = CLIENT_BUILDER.comment("Multiplier for Coin Dragon noises. Default: 1").defineInRange("Coin Dragon Multiplier", 1.0F, 0.0F, 20F);
         dragonfruitMult = CLIENT_BUILDER.comment("Multiplier for Dragonfruit Drake noises. Default: 1").defineInRange("Dragonfruit Drake Multiplier", 1.0F, 0.0F, 20F);
+        flapMult = CLIENT_BUILDER.comment("Multiplier for flapping noises. Default: 1").defineInRange("Flap Multiplier", 1.0F, 0.0F, 20F);
+        fireMult = CLIENT_BUILDER.comment("Multiplier for fire-breathing noises. Default: 1").defineInRange("Fire Multiplier", 1.0F, 0.0F, 20F);
         CLIENT_BUILDER.pop();
 
         CLIENT_BUILDER.push("Sound Frequency Reducer");
