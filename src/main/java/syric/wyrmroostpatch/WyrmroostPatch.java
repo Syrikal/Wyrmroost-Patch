@@ -68,7 +68,8 @@ public class WyrmroostPatch
 
         if (WRPatchConfig.enableShush.get()) {
             Shushing.init();
-            MinecraftForge.EVENT_BUS.addListener(this::shush);
+//            MinecraftForge.EVENT_BUS.addListener(this::shush);
+//            MinecraftForge.EVENT_BUS.addListener(this::shushRR);
             //Royal red roars don't work. This is a failed attempt to make them work.
 //            if (WRPatchConfig.roarMult.get() != 1 || WRPatchConfig.royalredMult.get() != 1) {
 //                MinecraftForge.EVENT_BUS.addListener(this::shushRR);

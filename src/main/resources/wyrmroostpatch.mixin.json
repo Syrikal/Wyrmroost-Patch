@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "syric.wyrmroostpatch.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinAbstractDragonEntity"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "wyrmroostpatch.mixin-refmap.json"
+}

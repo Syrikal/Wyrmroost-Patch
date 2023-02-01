@@ -24,6 +24,8 @@ public final class WRPatchConfig {
     public static final ForgeConfigSpec.ConfigValue<Double> dragonfruitMult;
 
     public static final ForgeConfigSpec.ConfigValue<Double> idleCancel;
+    public static final ForgeConfigSpec.ConfigValue<Double> bflAttackCancel;
+
 
     public static final ForgeConfigSpec.ConfigValue<Boolean> tooltipFix;
 
@@ -57,8 +59,9 @@ public final class WRPatchConfig {
         dragonfruitMult = CLIENT_BUILDER.comment("Multiplier for Dragonfruit Drake noises. Default: 1").defineInRange("Dragonfruit Drake Multiplier", 1.0F, 0.0F, 2F);
         CLIENT_BUILDER.pop();
 
-        CLIENT_BUILDER.push("Idle Sound Reducer");
+        CLIENT_BUILDER.push("Sound Frequency Reducer");
         idleCancel = CLIENT_BUILDER.comment("Chance that idle sounds will be cancelled. Default: 0").defineInRange("Idle Sound Cancellation Chance", 0.0, 0.0, 1);
+        bflAttackCancel = CLIENT_BUILDER.comment("Chance that BFL attack sounds will be cancelled. Default: 0").defineInRange("BFL Attack Sound Cancellation Chance", 0.0, 0.0, 1);
         CLIENT_BUILDER.pop();
 
         CLIENT_BUILDER.push("Fixed Rooststalker Tooltip");

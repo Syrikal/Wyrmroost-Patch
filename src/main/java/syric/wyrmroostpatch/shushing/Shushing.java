@@ -3,24 +3,28 @@ package syric.wyrmroostpatch.shushing;
 import com.github.wolfshotz.wyrmroost.registry.WRSounds;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.SimpleSound;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
 import syric.wyrmroostpatch.WRPatchConfig;
+import syric.wyrmroostpatch.WyrmroostPatch;
 
 import java.util.*;
 
-import static syric.wyrmroostpatch.Util.chatPrint;
-
+@OnlyIn(Dist.CLIENT)
 public class Shushing {
 
-    private static List<SoundEvent> ALL_SOUNDS;
+    public static List<SoundEvent> ALL_SOUNDS;
 
-    private static final Map<List<SoundEvent>, Double> MODIFIED_SPECIES = new HashMap<>();
+    public static final Map<List<SoundEvent>, Double> MODIFIED_SPECIES = new HashMap<>();
 
-    private static List<SoundEvent> ROARS;
-    private static List<SoundEvent> IDLES;
+    public static List<SoundEvent> ROARS;
+    public static List<SoundEvent> IDLES;
+
+//    private static SimpleSound defaultSound = new SimpleSound(WRSounds.ENTITY_ROYALRED_ROAR.get().getLocation(), SoundCategory.NEUTRAL, 1, 1, false, 0, sound.getAttenuation(), sound.getX(), sound.getY(), sound.getZ(), sound.isRelative());
+
 
     public static void init() {
         ALL_SOUNDS = new ArrayList<>(Arrays.asList(
@@ -160,7 +164,6 @@ public class Shushing {
                     WRSounds.ENTITY_ROYALRED_IDLE.get(),
                     WRSounds.ENTITY_BFLY_IDLE.get()));
         }
-
     }
 
     public static void shush(PlaySoundAtEntityEvent event) {
@@ -178,20 +181,63 @@ public class Shushing {
 
     //Doesn't work unfortunately
     public static void shushRR(PlaySoundEvent event) {
+//        if (SECONDARY_SHUSHES.containsKey(event.getSound())) {
+////            double volume = SECONDARY_SHUSHES.get(event.getSound()) * calculateMultiplier(getSound(event.getSound()));
+//            //REPLACE WITH CORRECT SOUND
+//
+//
+////            SimpleSound replacement = new SimpleSound(WRSounds.ENTITY_ROYALRED_ROAR.get().getLocation(), SoundCategory.NEUTRAL, (float) (sound.getVolume() * 0.1), sound.getPitch(), sound.isLooping(), sound.getDelay(), sound.getAttenuation(), sound.getX(), sound.getY(), sound.getZ(), sound.isRelative());
+//        }
         if (event.getSound().getLocation().equals(WRSounds.ENTITY_ROYALRED_ROAR.get().getLocation())) {
+            WyrmroostPatch.LOGGER.info("Detected Royal Red Roar");
             ISound sound = event.getSound();
 //            SimpleSound replacement = new SimpleSound(WRSounds.ENTITY_ROYALRED_ROAR.get().getLocation(), SoundCategory.NEUTRAL, (float) (sound.getVolume() * calculateMultiplier(WRSounds.ENTITY_ROYALRED_ROAR.get())), sound.getPitch(), sound.isLooping(), sound.getDelay(), sound.getAttenuation(), sound.getX(), sound.getY(), sound.getZ(), sound.isRelative());
-            SimpleSound replacement = new SimpleSound(WRSounds.ENTITY_ROYALRED_ROAR.get().getLocation(), SoundCategory.NEUTRAL, (float) (sound.getVolume() * 0.1), sound.getPitch(), sound.isLooping(), sound.getDelay(), sound.getAttenuation(), sound.getX(), sound.getY(), sound.getZ(), sound.isRelative());
-            event.setResultSound(replacement);
+//            SimpleSound replacement = new SimpleSound(WRSounds.ENTITY_ROYALRED_ROAR.get().getLocation(), SoundCategory.NEUTRAL, (float) (sound.getVolume() * 0.1), sound.getPitch(), sound.isLooping(), sound.getDelay(), sound.getAttenuation(), sound.getX(), sound.getY(), sound.getZ(), sound.isRelative());
+//            event.setResultSound(replacement);
+        }
+        else if (event.getSound().getLocation().equals(WRSounds.ENTITY_BFLY_HURT.get().getLocation())) {
+            WyrmroostPatch.LOGGER.info("Detected BFL roar, location: " + event.getSound().getLocation());
+            WyrmroostPatch.LOGGER.info("Sound data: " + event.getSound());
+            if (event.getSound() instanceof SimpleSound) {
+                WyrmroostPatch.LOGGER.info("It's a simple sound");
+            }
+            WyrmroostPatch.LOGGER.info("Sound's sound: " + event.getSound().getSound());
+//            WyrmroostPatch.LOGGER.info("Sound's sound's volume: " + event.getSound().getSound().getVolume());
+
+            WyrmroostPatch.LOGGER.info("ResultSound data: " + event.getSound());
+            if (event.getResultSound() instanceof SimpleSound) {
+                WyrmroostPatch.LOGGER.info("It's a simple sound");
+            }
+            WyrmroostPatch.LOGGER.info("ResultSound's sound: " + event.getResultSound().getSound());
+
+
+//            Random random = new Random();
+//            if (random.nextDouble() < 0.5) {
+//                WyrmroostPatch.LOGGER.info("Attempting to cancel BFL roar!");
+//                event.setResultSound(null);
+//            } else {
+//                ISound sound = event.getResultSound();
+//                float volume = sound.getVolume();
+//            SimpleSound replacement = new SimpleSound(WRSounds.ENTITY_ROYALRED_ROAR.get().getLocation(), SoundCategory.NEUTRAL, (float) (sound.getVolume() * calculateMultiplier(WRSounds.ENTITY_ROYALRED_ROAR.get())), sound.getPitch(), sound.isLooping(), sound.getDelay(), sound.getAttenuation(), sound.getX(), sound.getY(), sound.getZ(), sound.isRelative());
+//                SimpleSound replacement = new SimpleSound(SoundEvents.ANVIL_LAND.getLocation(), SoundCategory.NEUTRAL, (float) 2.0, sound.getPitch(), sound.isLooping(), sound.getDelay(), sound.getAttenuation(), sound.getX(), sound.getY(), sound.getZ(), sound.isRelative());
+//                event.setResultSound(replacement);
+//            }
         }
     }
 
 
-    private static Double calculateMultiplier(SoundEvent sound) {
+    public static double calculateMultiplier(SoundEvent sound) {
+        if (sound == null) {
+            return 1.0;
+        }
         Random random = new Random();
         if (WRPatchConfig.idleCancel.get() != 0 && IDLES.contains(sound) && random.nextDouble() < WRPatchConfig.idleCancel.get()) {
             return 0.0;
         }
+//        if (WRPatchConfig.bflAttackCancel.get() != 0 && sound == BFL_HURT && random.nextDouble() < WRPatchConfig.bflAttackCancel.get()) {
+//            WyrmroostPatch.LOGGER.info("Cancelled BFL hurt noise");
+//            return 0.0;
+//        }
 
         double global = WRPatchConfig.globalMult.get();
         double species = 1;
@@ -210,6 +256,17 @@ public class Shushing {
 
         return global * species * roar;
     }
+
+//    private static SoundEvent getSound(ISound sound) {
+//        ResourceLocation location = sound.getLocation();
+//
+//        for (SoundEvent event : SECONDARY_SHUSHES.keySet()) {
+//            if (location.equals(event.getLocation())) {
+//                return event;
+//            }
+//        }
+//        return null;
+//    }
 
 
 }
