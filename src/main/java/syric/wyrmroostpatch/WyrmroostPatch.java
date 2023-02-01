@@ -2,7 +2,6 @@ package syric.wyrmroostpatch;
 
 import com.github.wolfshotz.wyrmroost.registry.WREntities;
 import net.minecraft.block.Block;
-import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
@@ -68,12 +67,7 @@ public class WyrmroostPatch
 
         if (WRPatchConfig.enableShush.get()) {
             Shushing.init();
-//            MinecraftForge.EVENT_BUS.addListener(this::shush);
-//            MinecraftForge.EVENT_BUS.addListener(this::shushRR);
-            //Royal red roars don't work. This is a failed attempt to make them work.
-//            if (WRPatchConfig.roarMult.get() != 1 || WRPatchConfig.royalredMult.get() != 1) {
-//                MinecraftForge.EVENT_BUS.addListener(this::shushRR);
-//            }
+            MinecraftForge.EVENT_BUS.addListener(this::shush);
         }
 
 
@@ -107,9 +101,9 @@ public class WyrmroostPatch
     private void shush(PlaySoundAtEntityEvent event) {
         Shushing.shush(event);
     }
-    private void shushRR(PlaySoundEvent event) {
-        Shushing.shushRR(event);
-    }
+//    private void shushRR(PlaySoundEvent event) {
+//        Shushing.shushRR(event);
+//    }
     private void renderNuggetTooltip(ItemTooltipEvent event) { RenderTooltip.renderTooltip(event); }
 
 
