@@ -6,10 +6,11 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
 import syric.wyrmroostpatch.WRPatchConfig;
+import syric.wyrmroostpatch.WyrmroostPatch;
 
 import java.util.*;
 
-@OnlyIn(Dist.CLIENT)
+//@OnlyIn(Dist.CLIENT)
 public class Shushing {
 
     public static List<SoundEvent> ALL_SOUNDS;
@@ -245,7 +246,7 @@ public class Shushing {
             species = WRPatchConfig.fireMult.get();
         }
 
-//        WyrmroostPatch.LOGGER.info("Set sound multiplier for " + sound.getLocation() + " to: " + global * species * roar);
+        WyrmroostPatch.LOGGER.info("Set sound multiplier for " + sound.getLocation() + " to: " + global * species * roar);
         return global * species * roar;
     }
 

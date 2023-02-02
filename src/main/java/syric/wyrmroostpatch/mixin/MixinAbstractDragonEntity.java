@@ -3,12 +3,15 @@ package syric.wyrmroostpatch.mixin;
 import com.github.wolfshotz.wyrmroost.entities.dragon.AbstractDragonEntity;
 import com.github.wolfshotz.wyrmroost.entities.dragon.RoostStalkerEntity;
 import net.minecraft.util.SoundEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import syric.wyrmroostpatch.WRPatchConfig;
 import syric.wyrmroostpatch.shushing.Shushing;
 
+//@OnlyIn(Dist.CLIENT)
 @Mixin(AbstractDragonEntity.class)
 public class MixinAbstractDragonEntity {
 

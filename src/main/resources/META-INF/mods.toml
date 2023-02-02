@@ -39,7 +39,7 @@ Right-click them with a Honey Treat, Gold Nugget, or Kelp-Wrapped Meat, respecti
 
 Adds tinctures that allow changing an alpine's variant.
 
-Adds configurable options to reduce the volume and frequency of some wyrmroost sounds.
+Adds configurable options to reduce the volume and frequency of wyrmroost sounds.
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.wyrmroostpatch]] #optional
@@ -65,5 +65,5 @@ Adds configurable options to reduce the volume and frequency of some wyrmroost s
 modId="wyrmroost"
 mandatory=true
 versionRange="[1.2.11,)"
-ordering="AFTER"
+ordering="BEFORE"
 side="BOTH"
