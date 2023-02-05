@@ -22,7 +22,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import syric.wyrmroostpatch.breeding.DragonFeedItem;
 import syric.wyrmroostpatch.breeding.RenderTooltip;
-import syric.wyrmroostpatch.shushing.Shushing;
+import syric.wyrmroostpatch.shushing.ShushingClient;
+import syric.wyrmroostpatch.shushing.ShushingCommon;
 
 import java.util.stream.Collectors;
 
@@ -66,7 +67,7 @@ public class WyrmroostPatch
 
 
         if (WRPatchConfig.enableShush.get()) {
-            Shushing.init();
+            ShushingCommon.init();
             MinecraftForge.EVENT_BUS.addListener(this::shush);
         }
 
@@ -99,11 +100,8 @@ public class WyrmroostPatch
         WRPatchEvents.interactEntity(event);
     }
     private void shush(PlaySoundAtEntityEvent event) {
-        Shushing.shush(event);
+        ShushingClient.shush(event);
     }
-//    private void shushRR(PlaySoundEvent event) {
-//        Shushing.shushRR(event);
-//    }
     private void renderNuggetTooltip(ItemTooltipEvent event) { RenderTooltip.renderTooltip(event); }
 
 
